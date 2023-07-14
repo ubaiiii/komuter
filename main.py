@@ -17,10 +17,10 @@ def trip_schedule(df_x, table):
      # check destination route if nan, drop col
     list_station = [ departure, destination]
     train_schedule = df_x.loc[df_x['Nombor Tren'].isin(list_station)]
-    if ( table == "Table 2") :
-        another_id = 0
-    else:
+    if ( table == "Table 1") :
         another_id = 1
+    else:
+        another_id = 0
 
     idx = 0
     column_to_be_drop = []
@@ -48,13 +48,13 @@ for index, row in df1.iterrows():
         y = index
 
     if ( y > x ) :
-        print ( "X : ", x ,"Y : ", y , " Read from Table 2") 
-        df = df2
-        table = "Table 2"
-    else :
-        print ( "X : ", x ,"Y : ", y , " Read from Table 1") 
+        # print ( "X : ", x ,"Y : ", y , " Read from Table 2") 
         df = df1
         table = "Table 1"
+    else :
+        # print ( "X : ", x ,"Y : ", y , " Read from Table 1") 
+        df = df2
+        table = "Table 2"
 
 
 
@@ -63,6 +63,8 @@ for index, row in df1.iterrows():
 
 
 train_schedule = trip_schedule(df, table)
+
+#print ("Read from > ", table)
 
 st.dataframe(train_schedule)
 
