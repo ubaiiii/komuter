@@ -12,8 +12,11 @@ with st.form(key='my_form'):
     destination = st.selectbox("Destination from", options=df1["Nombor Tren"].unique(), index=1)
     submit_button = st.form_submit_button(label='Submit')
 
-
+# lookup schedule
 def trip_schedule(df_x, table):
+    masa = datetime.now().time().strftime("%H:%M")
+    now = datetime.strptime((masa), '%H:%M').time() 
+
      # check destination route if nan, drop col
     list_station = [ departure, destination]
     train_schedule = df_x.loc[df_x['Nombor Tren'].isin(list_station)]
@@ -26,7 +29,10 @@ def trip_schedule(df_x, table):
     column_to_be_drop = []
     for y in train_schedule:
         try:
-            datetime.strptime((train_schedule.iat[another_id,idx]), '%H:%M').time()
+            if ( datetime.strptime((train_schedule.iat[another_id,idx]), '%H:%M').time() ) < now:
+                column_to_be_drop.append(idx)
+            else:
+                datetime.strptime((train_schedule.iat[another_id,idx]), '%H:%M').time()
         except:
             column_to_be_drop.append(idx)
         
@@ -57,16 +63,27 @@ for index, row in df1.iterrows():
         table = "Table 2"
 
 
-
-
-
-
-
 train_schedule = trip_schedule(df, table)
 
-#print ("Read from > ", table)
+## formatting dataframe
+schedule_tranpose = train_schedule.T
 
-st.dataframe(train_schedule)
+schedule_tranpose.columns = [departure, destination]
+
+# CSS to inject contained in a string
+hide_table_row_index = """
+            <style>
+            thead tr th:first-child {display:none}
+            tbody th {display:none}
+            </style>
+            """
+
+# Inject CSS with Markdown
+st.markdown(hide_table_row_index, unsafe_allow_html=True)
+
+# st.dataframe(schedule_tranpose)
+# Display a static table
+st.table(schedule_tranpose)
 
 
 
