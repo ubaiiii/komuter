@@ -9,13 +9,15 @@ df2 = pd.read_excel('BC-PS-BC-Hari-Bekerja-10072023.xlsx', sheet_name="Table 2")
 
 masa = datetime.now().time().strftime("%H:%M")
 
+st.title('KTM Komuter Timetable')
+st.header('Weekdays only')
+st.subheader('Batu Caves - Pulau Sebang')
+st.markdown('_Effective 10th July 2023_')
+
+
+
 form = st.form("my_form")
-
-
 c = st.container()
-
-
-
 c.departure = form.selectbox("Depart from", options=df1["Nombor Tren"].unique(), index=0)
 c.destination = form.selectbox("Destination from", options=df1["Nombor Tren"].unique(), index=1)
 
@@ -111,9 +113,20 @@ hide_table_row_index = """
 # Inject CSS with Markdown
 st.markdown(hide_table_row_index, unsafe_allow_html=True)
 
-# st.dataframe(schedule_tranpose)
-# Display a static table
-st.table(schedule_tranpose)
+# st.write(len(schedule_tranpose))
+
+if ( len(schedule_tranpose) > 0 ) :
+    # st.dataframe(schedule_tranpose)
+    # Display a static table
+    st.table(schedule_tranpose)
+else:
+    txt_message = f'No more train from {c.departure}  towards  {c.destination}'
+    st.error(txt_message)
+
+
+
+
+
 
 
 
