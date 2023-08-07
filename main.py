@@ -35,8 +35,7 @@ else:
 
 form.form_submit_button("Submit")
 
-#kl_time = datetime.now().now() + timedelta(hours=8)
-kl_time = datetime.now().now() + timedelta(hours=0)
+kl_time = datetime.now().now() + timedelta(hours=8)
 masa = kl_time.time().strftime("%I:%M %p")
 time_depart = kl_time.time().replace(second=0, microsecond=0)
 
