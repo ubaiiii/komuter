@@ -1,8 +1,8 @@
 import pandas as pd
-import numpy as np
+#import numpy as np
 import streamlit as st
-from datetime import datetime
-from datetime import time
+from datetime import datetime, time,  timedelta
+
 
 df1 = pd.read_excel('BC-PS-BC-Hari-Bekerja-10072023.xlsx', sheet_name="Table 1")
 df2 = pd.read_excel('BC-PS-BC-Hari-Bekerja-10072023.xlsx', sheet_name="Table 2")
@@ -15,13 +15,16 @@ st.subheader('Batu Caves - Pulau Sebang')
 st.markdown('_Effective 10th July 2023_')
 
 
-
 form = st.form("my_form")
 c = st.container()
-c.departure = form.selectbox("Depart from", options=df1["Nombor Tren"].unique(), index=0)
-c.destination = form.selectbox("Destination from", options=df1["Nombor Tren"].unique(), index=1)
+c.departure = form.selectbox("Depart from", 
+                             options=df1["Nombor Tren"].unique(), 
+                             index=0)
+c.destination = form.selectbox("Destination from", 
+                               options=df1["Nombor Tren"].unique(), 
+                               index=1)
 
-c.current_time = st.checkbox('Tick this :blue[checkbox] to check for different time :sunglasses:')
+c.current_time = st.checkbox('Tick this :blue[checkbox] to check for different time :sunglasses:')  # noqa: E501
 
 if c.current_time:    
         time_depart = st.slider( 
@@ -31,6 +34,13 @@ else:
         time_depart = datetime.strptime((masa), '%H:%M').time() 
 
 form.form_submit_button("Submit")
+
+#kl_time = datetime.now().now() + timedelta(hours=8)
+kl_time = datetime.now().now() + timedelta(hours=0)
+masa = kl_time.time().strftime("%I:%M %p")
+time_depart = kl_time.time().replace(second=0, microsecond=0)
+
+st.write('Current time is  :', time_depart)
 
 
 
@@ -55,20 +65,20 @@ def trip_schedule(df_x, table):
     column_to_be_drop = []
     for y in train_schedule:
         try:
-            if ( datetime.strptime((train_schedule.iat[another_id,idx]), '%H:%M').time() ) < time_depart:
+            if ( datetime.strptime((train_schedule.iat[another_id,idx]), '%H:%M').time() ) < time_depart:  # noqa: E501
                 column_to_be_drop.append(idx)
             else:
                 datetime.strptime((train_schedule.iat[another_id,idx]), '%H:%M').time()
                 if another_id == 1:
-                    if ( datetime.strptime((train_schedule.iat[0,idx]), '%H:%M').time() ) < time_depart:
+                    if ( datetime.strptime((train_schedule.iat[0,idx]), '%H:%M').time() ) < time_depart:  # noqa: E501
                         column_to_be_drop.append(idx)
 #                        st.write("Dopped some more data", train_schedule[0,idx])
-        except:
+        except:  # noqa: E722
             column_to_be_drop.append(idx)
         
         #idx = idx + 1
         idx += 1
-    train_schedule.drop(train_schedule.columns[column_to_be_drop], axis=1, inplace=True) 
+    train_schedule.drop(train_schedule.columns[column_to_be_drop], axis=1, inplace=True)   # noqa: E501
     
     return train_schedule
 
