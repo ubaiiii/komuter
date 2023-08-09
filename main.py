@@ -3,11 +3,13 @@ import pandas as pd
 import streamlit as st
 from datetime import datetime, time,  timedelta
 
+kl_time = datetime.now().now() + timedelta(hours=8)
+masa = kl_time.time().strftime("%I:%M %p")
+time_depart = kl_time.time().replace(second=0, microsecond=0)
+
 
 df1 = pd.read_excel('BC-PS-BC-Hari-Bekerja-10072023.xlsx', sheet_name="Table 1")
 df2 = pd.read_excel('BC-PS-BC-Hari-Bekerja-10072023.xlsx', sheet_name="Table 2")
-
-masa = datetime.now().time().strftime("%H:%M")
 
 st.title('KTM Komuter Timetable')
 st.header('Weekdays only')
@@ -24,22 +26,21 @@ c.destination = form.selectbox("Destination from",
                                options=df1["Nombor Tren"].unique(), 
                                index=1)
 
+st.write('Current time is  :', time_depart)
+
 c.current_time = st.checkbox('Tick this :blue[checkbox] to check for different time :sunglasses:')  # noqa: E501
 
 if c.current_time:    
         time_depart = st.slider( 
             "Choose your departure time :",
             value=(time(12, 00) ) )
-else:
-        time_depart = datetime.strptime((masa), '%H:%M').time() 
+# else:
+#         time_depart = datetime.strptime((masa), '%H:%M').time() 
 
 form.form_submit_button("Submit")
 
-kl_time = datetime.now().now() + timedelta(hours=8)
-masa = kl_time.time().strftime("%I:%M %p")
-time_depart = kl_time.time().replace(second=0, microsecond=0)
 
-st.write('Current time is  :', time_depart)
+
 
 
 
