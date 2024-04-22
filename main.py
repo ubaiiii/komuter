@@ -14,7 +14,8 @@ df2 = pd.read_excel('BC-PS-BC-Hari-Bekerja-10072023.xlsx', sheet_name="Table 2")
 st.title('KTM Komuter Timetable')
 st.header('Weekdays only')
 st.subheader('Batu Caves - Pulau Sebang')
-st.markdown('_Effective 10th July 2023_')
+st.markdown('_Initial version 10th July 2023_')
+st.markdown('_Updated on 22nd April 2024_')
 
 
 form = st.form("my_form")
