@@ -8,14 +8,15 @@ masa = kl_time.time().strftime("%I:%M %p")
 time_depart = kl_time.time().replace(second=0, microsecond=0)
 
 
-df1 = pd.read_excel('BC-PS-BC-Hari-Bekerja-10072023.xlsx', sheet_name="Table 1")
-df2 = pd.read_excel('BC-PS-BC-Hari-Bekerja-10072023.xlsx', sheet_name="Table 2")
+df1 = pd.read_excel('BCPS_2024 NEW RT_Hari Bekerja_22042024.xlsx', sheet_name="Table 1")
+df2 = pd.read_excel('BCPS_2024 NEW RT_Hari Bekerja_22042024.xlsx', sheet_name="Table 2")
 
 st.title('KTM Komuter Timetable')
 st.header('Weekdays only')
 st.subheader('Batu Caves - Pulau Sebang')
-st.markdown('_Initial version 10th July 2023_')
-st.markdown('_Updated on 22nd April 2024_')
+
+st.info('Updated on 22nd April 2024', icon="ℹ️")
+
 
 
 form = st.form("my_form")
