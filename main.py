@@ -55,7 +55,7 @@ def trip_schedule(df_x, table):
 
      # check destination route if nan, drop col
     list_station = [ c.departure, c.destination]
-    train_schedule = df_x.loc[df_x['Nombor Tren'].isin(list_station)]
+    train_schedule = df_x.loc[df_x['NOMBOR TREN'].isin(list_station)]
     if ( table == "Table 1") :
         another_id = 1
   #      st.write("Table 1 : ", another_id)
@@ -92,9 +92,9 @@ y = 99
 table = None
 
 for index, row in df1.iterrows():
-    if row['Nombor Tren'] == c.departure:
+    if row['NOMBOR TREN'] == c.departure:
         x = index    
-    if row['Nombor Tren'] == c.destination:
+    if row['NOMBOR TREN'] == c.destination:
         y = index
 
     if ( y > x ) :
