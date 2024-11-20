@@ -22,10 +22,10 @@ st.info('Updated on 20th November 2024', icon="ℹ️")
 form = st.form("my_form")
 c = st.container()
 c.departure = form.selectbox("Depart from", 
-                             options=df1["Nombor Tren"].unique(), 
+                             options=df1["NOMBOR TREN"].unique(), 
                              index=0)
 c.destination = form.selectbox("Destination from", 
-                               options=df1["Nombor Tren"].unique(), 
+                               options=df1["NOMBOR TREN"].unique(), 
                                index=1)
 
 st.write('Current time is  :', time_depart)
