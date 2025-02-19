@@ -84,7 +84,8 @@ def trip_schedule(df_x, table):
         
         #idx = idx + 1
         idx += 1
-    train_schedule.drop(train_schedule.columns[column_to_be_drop], axis=1, inplace=True)   # noqa: E501
+    # train_schedule.drop(train_schedule.columns[column_to_be_drop], axis=1, inplace=True)   # noqa: E501
+    train_schedule = train_schedule.drop(train_schedule.columns[column_to_be_drop], axis=1)
     
     return train_schedule
 
