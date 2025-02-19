@@ -1,5 +1,8 @@
+# Step 1: Download latest train schedule from KTM web
+# Step 2: Convert pdf to excel https://smallpdf.com/pdf-to-excel
+#
+
 import pandas as pd
-#import numpy as np
 import streamlit as st
 from datetime import datetime, time,  timedelta
 
@@ -7,9 +10,10 @@ kl_time = datetime.now().now() + timedelta(hours=8)
 masa = kl_time.time().strftime("%I:%M %p")
 time_depart = kl_time.time().replace(second=0, microsecond=0)
 
+excel_file_source = 'BCPS_2024_Hari Bekerja 02122024.xlsx'
 
-df1 = pd.read_excel('JW Batu Caves - Pulau Sebang - Batu Caves 04112024.xlsx', sheet_name="Table 1")
-df2 = pd.read_excel('JW Batu Caves - Pulau Sebang - Batu Caves 04112024.xlsx', sheet_name="Table 2")
+df1 = pd.read_excel(excel_file_source, sheet_name="Table 1", skiprows=2)
+df2 = pd.read_excel(excel_file_source, sheet_name="Table 2", skiprows=2)
 
 st.title('KTM Komuter Timetable')
 st.header('Weekdays only')
