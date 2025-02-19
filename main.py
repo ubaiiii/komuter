@@ -19,7 +19,7 @@ st.title('KTM Komuter Timetable')
 st.header('Weekdays only')
 st.subheader('Batu Caves - Pulau Sebang')
 
-st.info('Updated on 20th November 2024', icon="ℹ️")
+st.info('Updated on 19th February 2025', icon="ℹ️")
 
 
 
