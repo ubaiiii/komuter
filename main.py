@@ -35,16 +35,16 @@ kl_time = datetime.now() + timedelta(hours=8)
 masa = kl_time.time().strftime("%I:%M %p")
 time_depart = kl_time.time().replace(second=0, microsecond=0)
 
-excel_file_source = 'BCPS_2024_Hari Bekerja 02122024.xlsx'
+excel_file_source = 'BCPS 14042025 Weekday.xlsx'
 
-df1 = pd.read_excel(excel_file_source, sheet_name="Table 1", skiprows=2)
-df2 = pd.read_excel(excel_file_source, sheet_name="Table 2", skiprows=2)
+df1 = pd.read_excel(excel_file_source, sheet_name="Table 2", skiprows=2)
+df2 = pd.read_excel(excel_file_source, sheet_name="Table 3", skiprows=2)
 
 st.title('🚆 KTM Komuter Timetable')
 st.header('Weekdays only')
 st.subheader('Batu Caves - Pulau Sebang')
 
-st.info('Updated on 19th February 2025', icon="ℹ️")
+st.info('Updated on 14th April 2025', icon="ℹ️")
 
 # Form for user input
 with st.form("timetable_form"):
