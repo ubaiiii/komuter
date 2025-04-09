@@ -51,10 +51,10 @@ with st.form("timetable_form"):
     col1, col2 = st.columns(2)
     
     with col1:
-        departure = st.selectbox("Depart from", options=df1["NOMBOR TREN"].unique(), index=0)
+        departure = st.selectbox("Depart from", options=df1["TRAIN NUMBER"].unique(), index=0)
     
     with col2:
-        destination = st.selectbox("Destination", options=df1["NOMBOR TREN"].unique(), index=1)
+        destination = st.selectbox("Destination", options=df1["TRAIN NUMBER"].unique(), index=1)
     
     st.write(f'Current time is: **{time_depart.strftime("%I:%M %p")}**')
     
@@ -68,7 +68,7 @@ with st.form("timetable_form"):
 # Function to lookup schedule
 def trip_schedule(df_x, table):
     list_station = [departure, destination]
-    train_schedule = df_x.loc[df_x['NOMBOR TREN'].isin(list_station)]
+    train_schedule = df_x.loc[df_x['TRAIN NUMBER'].isin(list_station)]
     
     another_id = 1 if table == "Table 1" else 0
     
@@ -92,9 +92,9 @@ x = y = 99
 table = None
 
 for index, row in df1.iterrows():
-    if row['NOMBOR TREN'] == departure:
+    if row['TRAIN NUMBER'] == departure:
         x = index    
-    if row['NOMBOR TREN'] == destination:
+    if row['TRAIN NUMBER'] == destination:
         y = index
 
     if y > x:
